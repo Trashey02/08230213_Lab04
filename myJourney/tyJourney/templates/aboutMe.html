@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    About Me - 
+    {% if about %}
+      {{ about.name }}
+    {% else %}
+      Tashi Yangzom
+    {% endif %}
+  </title>
+  <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="hero about-hero">
+    <div class="overlay"></div>
+    <nav class="navbar">
+      <div class="logo">
+        {% if about %}
+          {{ about.name }}
+        {% else %}
+          Tashi Yangzom
+        {% endif %}
+      </div>
+      <ul class="nav-links">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'about_me' %}" class="active">About Me</a></li>
+      </ul>
+    </nav>
+    <div class="hero-content">
+      <h2>About Me</h2>
+      <p>Get to know who I am beyond the code and creativity.</p>
+    </div>
+  </header>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section">
+    {% if about %}
+      <div class="about-container">
+        <!-- PROFILE IMAGE SECTION -->
+        <div class="about-image">
+          {% if about.profile_image %}
+            <img src="{{ about.profile_image.url }}" alt="{{ about.name }}">
+          {% else %}
+            <img src="{% static 'images/photo_2025-10-25_22-15-33.jpg' %}" alt="Tashi Yangzom" class="profile-img">
+          {% endif %}
+        </div>
+        <div class="about-text">
+          <h2>Hi, I'm {{ about.name }}</h2>
+          <p>{{ about.description }}</p>
+          <div class="about-hobbies">
+            <h3>My Hobbies</h3>
+            <ul>
+              {% for hobby in hobbies_list %}
+                <li>{{ hobby }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="about-placeholder">
+        <h2>Hi, I'm Tashi Yangzom</h2>
+        <p>About me information is not available yet.</p>
+      </div>
+    {% endif %}
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 
+      {% if about %}
+        {{ about.name }}
+      {% else %}
+        Tashi Yangzom
+      {% endif %}
+      | All Rights Reserved
+    </p>
+  </footer>
+</body>
+</html>

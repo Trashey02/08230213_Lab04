@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tashi Yangzom Portfolio</title>
+  <link rel="stylesheet" href="{% static 'styles/style.css' %}">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="hero">
+    <div class="overlay"></div>
+    <nav class="navbar">
+      <h1 class="logo">Tashi Yangzom</h1>
+      <ul class="nav-links">
+        <li><a href="{% url 'index' %}" class="active">Home</a></li>
+        <li><a href="{% url 'about_me' %}">About Me</a></li>
+      </ul>
+    </nav>
+    <div class="hero-content">
+      <h2>Enjoy My Learning Journey</h2>
+      <p>Exploring creativity, skills, and growth through every challenge.</p>
+      <a href="{% url 'about_me' %}" class="btn">Know More</a>
+    </div>
+  </header>
+
+  <!-- LEARNING JOURNEY SECTION -->
+  <section class="rooms-section">
+    <h2 class="section-title">My Learning Journey</h2>
+    <div class="rooms-container">
+      {% if journeys %}
+        {% for journey in journeys %}
+          <div class="room-card">
+            <h3>{{ journey.year }} – {{ journey.skill }}</h3>
+            <p>{{ journey.challenges }}</p>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No learning journey data available yet.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- EXPERIENCE SECTION -->
+  <section class="experience-section">
+    <div class="exp-text">
+      <h2>The Journey That Defines Me</h2>
+      <p>Each year brought new lessons and challenges. Overcoming them has shaped me into a confident, creative, and curious learner who values growth and persistence.</p>
+      <a href="{% url 'about_me' %}" class="btn">Read My Story</a>
+    </div>
+    <div class="exp-image"></div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <h2>Reflections</h2>
+    {% if reflections %}
+      {% for reflection in reflections %}
+        <p class="quote">"{{ reflection.quote }}"</p>
+        <p class="author">— {{ reflection.author }}</p>
+      {% endfor %}
+    {% else %}
+      <p>No reflections available yet.</p>
+    {% endif %}
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 {% if about %}
+  {{ about.name }}
+{% else %}
+  Tashi Yangzom
+{% endif %}
+ | All Rights Reserved</p>
+  </footer>
+</body>
+</html>
